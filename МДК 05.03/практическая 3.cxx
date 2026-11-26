@@ -5,9 +5,8 @@
 
 using namespace std;
 
-double mem = 0.0; // Память калькулятора
+double mem = 0.0;
 
-// --- 1. Операции калькулятора (все 11 функций по заданию) ---
 double add(double a, double b) { return a + b; }
 double sub(double a, double b) { return a - b; }
 double mul(double a, double b) { return a * b; }
@@ -32,7 +31,6 @@ double memRead() { return mem; }
 void memAdd(double v) { mem += v; }
 void memClear() { mem = 0.0; }
 
-// --- 2. Модульные тесты ---
 void runTests() {
     const double E = 1e-6;
     assert(abs(add(2.5, 3.5) - 6.0) < E);
@@ -43,14 +41,12 @@ void runTests() {
     assert(abs(sqRoot(25) - 5.0) < E);
     assert(fact(0) == 1 && fact(5) == 120);
 
-    // Проверка исключений
     int errors = 0;
     try { divd(5, 0); } catch (const invalid_argument&) { errors++; }
     try { sqRoot(-4); } catch (const invalid_argument&) { errors++; }
     try { fact(-3); } catch (const invalid_argument&) { errors++; }
     assert(errors == 3);
 
-    // Проверка памяти
     memClear(); assert(memRead() == 0.0);
     memSave(42.5); assert(abs(memRead() - 42.5) < E);
     memAdd(7.5); assert(abs(memRead() - 50.0) < E);
@@ -59,7 +55,6 @@ void runTests() {
     cout << "[OK] Все модульные тесты успешно пройдены!\n\n";
 }
 
-// --- 3. Консольное меню ---
 int main() {
     setlocale(LC_ALL, "Russian");
     runTests();
